@@ -1,0 +1,10 @@
+{
+  "name": "Picture AAC Talker",
+  "short_name": "AAC Talker",
+  "description": "A local picture-based AAC communication board with board building tools.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6f7f2",
+  "theme_color": "#247c63",
+  "icons": []
+}

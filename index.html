@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#247c63" />
+    <title>Picture AAC Talker</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" aria-label="Picture AAC Talker">
+      <section class="demo-banner" aria-label="Prototype notice">
+        <strong>Prototype demo.</strong>
+        This tool is for feedback and exploration only. Press F1 on a control for help.
+      </section>
+
+      <section class="talk-strip" aria-label="Message builder">
+        <div id="sentence" class="sentence" aria-live="polite" aria-label="Current message"></div>
+        <div class="talk-actions">
+          <button id="speakBtn" class="action primary" type="button">Speak</button>
+          <button id="backspaceBtn" class="action" type="button">Backspace</button>
+          <button id="clearBtn" class="action danger" type="button">Clear</button>
+        </div>
+      </section>
+
+      <nav class="mode-tabs" aria-label="App sections">
+        <button class="mode-tab" type="button" data-mode="talk" aria-selected="true">Communicate</button>
+        <button class="mode-tab" type="button" data-mode="group">Group Chat</button>
+        <button class="mode-tab" type="button" data-mode="builder">Builder</button>
+        <button class="mode-tab" type="button" data-mode="settings">Settings</button>
+        <button class="mode-tab" type="button" data-mode="help">Help</button>
+      </nav>
+
+      <section id="talkView" class="view active" aria-label="Communication board">
+        <div class="utility-row" aria-label="Communication tools">
+          <label class="search-box">
+            <span>Find word</span>
+            <input id="wordSearch" type="search" autocomplete="off" placeholder="Search pictures or type to say" />
+          </label>
+          <button id="quickSpeakBtn" class="action compact" type="button">Say now</button>
+          <select id="voiceSelect" class="voice-select" aria-label="Voice"></select>
+        </div>
+
+        <nav id="tabs" class="tabs" aria-label="Vocabulary pages"></nav>
+        <section id="board" class="board" aria-label="Picture vocabulary"></section>
+
+        <section id="phraseBank" class="phrase-bank" aria-label="Quick phrases"></section>
+
+        <section class="sms-panel" aria-label="SMS tools">
+          <label>
+            SMS number
+            <input id="smsNumber" type="tel" inputmode="tel" autocomplete="tel" placeholder="Caregiver phone number" />
+          </label>
+          <button id="smsSendBtn" class="action primary" type="button">Send SMS</button>
+          <button id="copyMessageBtn" class="action" type="button">Copy Message</button>
+          <label class="wide">
+            Received message
+            <textarea id="receivedMessage" rows="2" placeholder="Paste a received text here to speak it"></textarea>
+          </label>
+          <button id="speakReceivedBtn" class="action" type="button">Speak Received</button>
+          <p id="smsStatus" class="status-text" aria-live="polite"></p>
+        </section>
+      </section>
+
+      <section id="groupView" class="view" aria-label="Group chat">
+        <div class="group-layout">
+          <section class="panel group-setup">
+            <h1>Group Chat</h1>
+            <p>Use this during a group therapy activity to send the current AAC message into a shared chat. This demo syncs between tabs on the same device. Multi-device rooms need a small realtime service.</p>
+            <div class="form-pair">
+              <label>
+                Participant name
+                <input id="chatName" type="text" autocomplete="name" placeholder="Student, caregiver, SLP" />
+              </label>
+              <label>
+                Room code
+                <input id="chatRoom" type="text" inputmode="text" autocomplete="off" placeholder="therapy-room" />
+              </label>
+            </div>
+            <div class="tool-stack">
+              <button id="sendChatBtn" class="action primary" type="button">Send AAC Message</button>
+              <button id="sendTypedChatBtn" class="action" type="button">Send Typed Reply</button>
+              <button id="speakChatBtn" class="action" type="button">Speak Chat</button>
+              <button id="exportChatBtn" class="action" type="button">Save Chat</button>
+              <button id="clearChatBtn" class="action danger" type="button">Clear Local Chat</button>
+            </div>
+            <label>
+              Typed reply
+              <textarea id="chatTypedMessage" rows="2" placeholder="Type a message if needed"></textarea>
+            </label>
+            <p id="chatStatus" class="status-text" aria-live="polite"></p>
+          </section>
+
+          <section class="panel chat-panel">
+            <div class="chat-head">
+              <h1>Room Messages</h1>
+              <button id="speakLastChatBtn" class="action" type="button">Speak Last</button>
+            </div>
+            <ol id="chatLog" class="chat-log" aria-live="polite"></ol>
+          </section>
+        </div>
+      </section>
+
+      <section id="builderView" class="view" aria-label="Board builder">
+        <div class="builder-grid">
+          <section id="pictureWordBuilder" class="panel wide picture-word-builder" aria-label="Picture word builder">
+            <div class="builder-head">
+              <div>
+                <h1>Picture Word Builder</h1>
+                <p>Pick a category, then tap a word or drag it onto the board preview. This is the easiest way to build a board from the vocabulary bank.</p>
+              </div>
+              <label>
+                Build page
+                <select id="builderPageSelect"></select>
+              </label>
+            </div>
+            <div class="word-builder-layout">
+              <section class="word-bank" aria-label="Vocabulary word bank">
+                <div class="form-pair">
+                  <label>
+                    Category
+                    <select id="wordCategory"></select>
+                  </label>
+                  <label>
+                    Search words
+                    <input id="wordBankSearch" type="search" autocomplete="off" placeholder="Search food, feelings, school..." />
+                  </label>
+                </div>
+                <div id="wordBankList" class="word-bank-list" aria-label="Available picture words"></div>
+              </section>
+              <section class="board-builder-preview" aria-label="Drop words onto this board">
+                <div class="preview-head">
+                  <h2>Board Preview</h2>
+                  <p>Drop words here or tap words from the bank.</p>
+                </div>
+                <div id="builderBoardDrop" class="builder-board-drop" tabindex="0"></div>
+                <p id="wordBuilderStatus" class="status-text" aria-live="polite"></p>
+              </section>
+            </div>
+          </section>
+
+          <form id="generatorForm" class="panel" autocomplete="off">
+            <h1>Board Generator</h1>
+            <label>
+              Board name
+              <input id="boardName" type="text" value="My AAC Board" />
+            </label>
+            <label>
+              Describe the user or situation
+              <textarea id="boardPrompt" rows="4">mostly non-verbal child at home, school, meals, play, feelings, bathroom, help</textarea>
+            </label>
+            <div class="form-pair">
+              <label>
+                Columns
+                <input id="boardColumns" type="number" min="2" max="9" value="6" />
+              </label>
+              <label>
+                Tile size
+                <select id="tileSize">
+                  <option value="comfortable">Comfortable</option>
+                  <option value="large">Large</option>
+                  <option value="compact">Compact</option>
+                  <option value="dense">Dense 9 x 9</option>
+                </select>
+              </label>
+            </div>
+            <button class="action primary" type="submit">Generate Board</button>
+          </form>
+
+          <form id="tileForm" class="panel" autocomplete="off">
+            <h1>Add Picture Tile</h1>
+            <div class="form-pair">
+              <label>
+                Word
+                <input id="tileWord" type="text" placeholder="juice" required />
+              </label>
+              <label>
+                Speak as
+                <input id="tileSpeak" type="text" placeholder="juice" />
+              </label>
+            </div>
+            <div class="form-pair">
+              <label>
+                Picture
+                <input id="tileIcon" type="text" placeholder="cup, heart, yes, school" />
+              </label>
+              <label>
+                Type
+                <select id="tileKind">
+                  <option value="noun">Thing</option>
+                  <option value="verb">Action</option>
+                  <option value="core">Core</option>
+                  <option value="pronoun">Person word</option>
+                  <option value="adjective">Feeling/description</option>
+                  <option value="social">Social</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              Page
+              <select id="tilePage"></select>
+            </label>
+            <button class="action primary" type="submit">Add Tile</button>
+          </form>
+
+          <form id="pageForm" class="panel" autocomplete="off">
+            <h1>Add Page</h1>
+            <label>
+              Page name
+              <input id="pageName" type="text" placeholder="Therapy" required />
+            </label>
+            <button class="action primary" type="submit">Add Page</button>
+          </form>
+
+          <section class="panel">
+            <h1>Board Tools</h1>
+            <div class="tool-stack">
+              <button id="editModeBtn" class="action" type="button">Edit Mode: Off</button>
+              <button id="printBtn" class="action" type="button">Print Board</button>
+              <button id="exportBtn" class="action" type="button">Export Backup</button>
+              <label class="file-action">
+                Import Backup
+                <input id="importFile" type="file" accept="application/json,.json" />
+              </label>
+              <button id="resetBtn" class="action danger" type="button">Restore Starter Board</button>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h1>Profiles and Saved Boards</h1>
+            <label>
+              Profile or board name
+              <input id="profileName" type="text" placeholder="Home board, School board, Therapy practice" />
+            </label>
+            <div class="tool-stack">
+              <button id="saveProfileBtn" class="action primary" type="button">Save Profile</button>
+              <button id="loadProfileBtn" class="action" type="button">Load Profile</button>
+              <button id="deleteProfileBtn" class="action danger" type="button">Delete Profile</button>
+            </div>
+            <label>
+              Saved profiles
+              <select id="profileSelect"></select>
+            </label>
+            <div class="storage-meter" aria-label="Local storage use">
+              <div class="storage-meter-bar"><span id="storageMeterFill"></span></div>
+              <p id="storageStatus" class="status-text" aria-live="polite">Storage use will appear here.</p>
+            </div>
+            <p id="profileStatus" class="status-text" aria-live="polite"></p>
+          </section>
+
+          <section class="panel">
+            <h1>Starter Boards</h1>
+            <label>
+              Choose a starter
+              <select id="starterBoard"></select>
+            </label>
+            <button id="loadStarterBtn" class="action primary" type="button">Load Starter</button>
+          </section>
+
+          <section class="panel">
+            <h1>Vocabulary Builder</h1>
+            <label>
+              Target words
+              <textarea id="targetWords" rows="4" placeholder="my, up, down, off, on, play, more, go, eat, drink, turn"></textarea>
+            </label>
+            <label class="toggle">
+              <input id="maskTargets" type="checkbox" />
+              Show only target words
+            </label>
+            <button id="applyTargetsBtn" class="action primary" type="button">Apply Targets</button>
+          </section>
+        </div>
+      </section>
+
+      <section id="settingsView" class="view" aria-label="Settings">
+        <div class="settings-grid">
+          <section class="panel">
+            <h1>Speech</h1>
+            <label>
+              Rate
+              <input id="speechRate" type="range" min="0.6" max="1.3" step="0.1" value="0.9" />
+            </label>
+            <label>
+              Pitch
+              <input id="speechPitch" type="range" min="0.7" max="1.4" step="0.1" value="1" />
+            </label>
+            <label class="toggle">
+              <input id="speakEachWord" type="checkbox" checked />
+              Speak each tile when tapped
+            </label>
+          </section>
+
+          <section class="panel">
+            <h1>Access</h1>
+            <label class="toggle">
+              <input id="lockBoard" type="checkbox" checked />
+              Lock editing during communication
+            </label>
+            <label class="toggle">
+              <input id="largeText" type="checkbox" />
+              Larger tile labels
+            </label>
+            <label class="toggle">
+              <input id="highContrast" type="checkbox" />
+              High contrast
+            </label>
+          </section>
+
+          <section class="panel wide">
+            <h1>Local-first Promise</h1>
+            <p>This app saves boards in this browser on this device. There is no subscription, account, cloud sync, or usage tracking built into this version.</p>
+          </section>
+
+          <section class="panel wide">
+            <h1>Privacy Guardrails</h1>
+            <p>Do not enter private medical details, addresses, real phone numbers, or identifying child information when sharing screenshots or feedback. The SMS number field is only saved in this browser's local storage on this device.</p>
+          </section>
+
+          <section class="panel wide">
+            <h1>SMS Notes</h1>
+            <p>Send SMS opens the device's Messages app with the current AAC message filled in. Receiving SMS directly inside this browser app requires a phone-number service or paired-device bridge, so this local version supports pasting a reply and speaking it aloud.</p>
+          </section>
+
+          <section class="panel wide">
+            <h1>Group Chat Notes</h1>
+            <p>The built-in Group Chat is a local demo that syncs between tabs or windows on the same device. To use separate iPads, phones, or computers in a therapy group, the app needs a backend realtime room service such as Firebase, Supabase, or a custom WebSocket server.</p>
+          </section>
+        </div>
+      </section>
+
+      <section id="helpView" class="view" aria-label="Help and practice guides">
+        <div class="help-grid">
+          <section class="panel wide">
+            <h1>Practice Guides</h1>
+            <p>Tap any guide to open it in a large frame or full screen. Open the full help page for Step 1, Step 2, Step 3 lists plus narrated walkthroughs.</p>
+            <a class="help-link" href="docs/help.html">Open full help page</a>
+          </section>
+          <section class="panel wide">
+            <h1>Tool Reference</h1>
+            <div class="tool-reference">
+              <article>
+                <h2>Communicate</h2>
+                <p>Build a spoken message from picture tiles.</p>
+                <ol>
+                  <li>Choose a page.</li>
+                  <li>Tap tiles in order.</li>
+                  <li>Check the message bar.</li>
+                  <li>Tap Speak.</li>
+                </ol>
+              </article>
+              <article>
+                <h2>Find Word</h2>
+                <p>Locate vocabulary or speak a temporary phrase.</p>
+                <ol>
+                  <li>Type part of a word.</li>
+                  <li>Tap a matching tile.</li>
+                  <li>Use Say Now for a phrase not on the board.</li>
+                </ol>
+              </article>
+              <article>
+                <h2>Group Chat</h2>
+                <p>Practice turn-taking in a local room log.</p>
+                <ol>
+                  <li>Enter name and room code.</li>
+                  <li>Build an AAC message.</li>
+                  <li>Send it to the room.</li>
+                  <li>Use Speak Last to hear a reply.</li>
+                </ol>
+              </article>
+              <article>
+                <h2>Builder</h2>
+                <p>Prepare vocabulary before communication practice.</p>
+                <ol>
+                  <li>Use Picture Word Builder for visual tap-to-add board building.</li>
+                  <li>Choose the Build page before adding words.</li>
+                  <li>Use category or search to find words.</li>
+                  <li>Scroll dense previews sideways if needed.</li>
+                  <li>Save a profile or export a backup.</li>
+                </ol>
+              </article>
+              <article>
+                <h2>Settings</h2>
+                <p>Adjust speech and access supports.</p>
+                <ol>
+                  <li>Test rate and pitch.</li>
+                  <li>Choose tile speech behavior.</li>
+                  <li>Lock editing for daily use.</li>
+                  <li>Use larger labels or high contrast if needed.</li>
+                </ol>
+              </article>
+              <article>
+                <h2>Backup</h2>
+                <p>Protect custom boards and move them between browsers.</p>
+                <ol>
+                  <li>Export before big edits.</li>
+                  <li>Store JSON files privately.</li>
+                  <li>Import only trusted backups.</li>
+                </ol>
+              </article>
+            </div>
+          </section>
+          <figure class="guide-card">
+            <img src="docs/animations/communicate-workflow.gif" alt="Animated guide for communicating with picture tiles" />
+            <figcaption>Communicate with picture tiles</figcaption>
+          </figure>
+          <figure class="guide-card">
+            <img src="docs/animations/starter-board-workflow.gif" alt="Animated guide for loading starter boards" />
+            <figcaption>Load a starter board</figcaption>
+          </figure>
+          <figure class="guide-card">
+            <img src="docs/animations/vocabulary-builder-workflow.gif" alt="Animated guide for Vocabulary Builder target words" />
+            <figcaption>Practice target words</figcaption>
+          </figure>
+          <figure class="guide-card">
+            <img src="docs/animations/custom-tile-workflow.gif" alt="Animated guide for adding a custom picture tile" />
+            <figcaption>Add custom tiles</figcaption>
+          </figure>
+          <figure class="guide-card">
+            <img src="docs/animations/settings-workflow.gif" alt="Animated guide for speech and access settings" />
+            <figcaption>Adjust speech and access</figcaption>
+          </figure>
+          <figure class="guide-card">
+            <img src="docs/screenshots/06-backup-print-step-1.png" alt="Step 1 guide for backup, import, and print tools" />
+            <figcaption>Back up and print</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <dialog id="guideDialog" class="guide-dialog" aria-label="Expanded help guide">
+        <div class="guide-dialog-head">
+          <h1 id="guideDialogTitle">Help guide</h1>
+          <div class="guide-dialog-actions">
+            <button id="guideFullscreenBtn" class="action" type="button">Full screen</button>
+            <button id="guideCloseBtn" class="action danger" type="button">Close</button>
+          </div>
+        </div>
+        <div class="guide-stage">
+          <img id="guideDialogImage" alt="" />
+        </div>
+      </dialog>
+
+      <dialog id="contextHelpDialog" class="context-help-dialog" aria-label="Context help">
+        <div class="context-help-head">
+          <h1 id="contextHelpTitle">Help</h1>
+          <button id="contextHelpCloseBtn" class="action danger" type="button">Close</button>
+        </div>
+        <p id="contextHelpBody"></p>
+        <a class="help-link" href="docs/help.html">Open full help</a>
+      </dialog>
+
+      <div id="helpTooltip" class="help-tooltip" role="tooltip"></div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
