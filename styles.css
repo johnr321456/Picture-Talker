@@ -115,7 +115,7 @@ button {
 }
 
 .mode-tabs {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .action,
@@ -337,11 +337,80 @@ body.large-text .tile-label {
 
 .builder-grid,
 .settings-grid,
-.group-layout {
+.group-layout,
+.finder-layout {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   align-content: start;
+}
+
+.finder-panel {
+  align-content: start;
+}
+
+.finder-caption {
+  min-height: 150px;
+  padding: 16px;
+  border: 3px solid var(--primary);
+  border-radius: 8px;
+  background: #f8fbfa;
+  font-size: 2rem;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.finder-suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.finder-suggestion {
+  min-height: 96px;
+  padding: 10px;
+  border: 2px solid rgba(25, 33, 31, 0.25);
+  border-radius: 8px;
+  color: var(--ink);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+}
+
+.finder-suggestion .tile-icon {
+  font-size: 2.4rem;
+}
+
+.finder-suggestion .tile-label {
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.finder-suggestion.core {
+  background: var(--core);
+}
+
+.finder-suggestion.verb {
+  background: var(--verb);
+}
+
+.finder-suggestion.adjective {
+  background: var(--adj);
+}
+
+.finder-suggestion.noun {
+  background: var(--noun);
+}
+
+.finder-suggestion.pronoun {
+  background: var(--pronoun);
+}
+
+.finder-suggestion.social {
+  background: var(--social);
 }
 
 .group-setup {
@@ -902,6 +971,7 @@ textarea {
   .builder-head,
   .word-builder-layout,
   .group-layout,
+  .finder-layout,
   .settings-grid,
   .help-grid,
   .tool-reference {
@@ -924,6 +994,10 @@ textarea {
 
   .phrase-bank {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .finder-suggestions {
+    grid-template-columns: 1fr;
   }
 
   .sms-panel .action {

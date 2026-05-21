@@ -108,6 +108,7 @@ const starterPages = [
     tile("feel", "feel", "talk", "verb"),
     tile("go", "go", "go", "verb"),
     tile("come", "come", "go", "verb"),
+    tile("to", "to", "right", "core"),
     tile("more", "more", "more", "core"),
     tile("all done", "all done", "done", "core"),
     tile("help", "help", "help", "core"),
@@ -125,7 +126,6 @@ const starterPages = [
     tile("listen", "listen", "listen", "verb"),
     tile("make", "make", "make", "verb"),
     tile("put", "put", "put", "verb"),
-    tile("turn", "turn", "turn", "verb"),
     tile("open", "open", "open", "verb"),
     tile("in", "in", "open", "core"),
     tile("out", "out", "go", "core"),
@@ -355,6 +355,7 @@ const expandedCoreNineByNineTiles = [
   tile("make", "make", "make", "verb"),
   tile("go", "go", "go", "verb"),
   tile("come", "come", "go", "verb"),
+  tile("to", "to", "right", "core"),
   tile("look", "look", "look", "verb"),
   tile("listen", "listen", "listen", "verb"),
   tile("read", "read", "read", "verb"),
@@ -576,6 +577,7 @@ const wordBankCategories = [
       wordBankItem("want", "want", "verb"),
       wordBankItem("more", "more", "core"),
       wordBankItem("go", "go", "verb"),
+      wordBankItem("to", "right", "core"),
       wordBankItem("stop", "stop", "core"),
       wordBankItem("help", "help", "core"),
       wordBankItem("all done", "done", "core"),
@@ -1421,6 +1423,7 @@ const aacilInspiredWordBankCategories = [
 
 const contextHelpTopics = [
   ["[data-mode='talk']", "Communicate Tab", "Use this screen when the AAC user wants to build and speak a message.\n\nSteps:\n1. Choose a vocabulary page, such as Core, People, Actions, Things, or Feelings.\n2. Tap picture tiles in the order the message should be spoken.\n3. Check the message bar at the top.\n4. Tap Speak to read the whole message.\n\nTip: Use Find Word when you know the word but do not know which page it is on."],
+  ["[data-mode='finder']", "Word Finder Tab", "Use Word Finder when the AAC user understands written words better than spoken words.\n\nSteps:\n1. Tap Start Listening if the browser supports speech recognition, or type the heard words manually.\n2. Watch the large caption area for the written words.\n3. Tap Find Responses.\n4. Choose a suggested response to place it in the message bar.\n5. Tap Speak when the response is ready.\n\nNote: Listening needs microphone permission and works best on secure websites such as GitHub Pages."],
   ["[data-mode='group']", "Group Chat Tab", "Use this screen during a group therapy activity when several people are taking turns sending messages.\n\nSteps:\n1. Enter a participant name.\n2. Enter a room code for the activity.\n3. Build a message on the Communicate tab.\n4. Return to Group Chat and choose Send AAC Message.\n5. Use Speak Last to read the newest room message aloud.\n\nNote: This prototype only syncs across tabs or windows on the same device."],
   ["[data-mode='builder']", "Builder Tab", "Use Builder when a caregiver, SLP, or teacher needs to prepare vocabulary before practice.\n\nSteps:\n1. Start with a starter board or generate a board from a situation description.\n2. Add any missing pages or custom tiles.\n3. Use Vocabulary Builder to focus on a small target list.\n4. Export a backup after the board works well.\n\nTip: Keep the board small at first, then add vocabulary as routines grow."],
   ["[data-mode='settings']", "Settings Tab", "Use Settings to make speech and access choices easier for the AAC user.\n\nSteps:\n1. Adjust speech rate and pitch.\n2. Decide whether each tile should speak immediately.\n3. Keep editing locked for daily communication.\n4. Turn on larger labels or high contrast if the board is hard to see.\n\nNote: Voice choices come from the browser and device."],
@@ -1436,6 +1439,12 @@ const contextHelpTopics = [
   ["#copyMessageBtn", "Copy Message", "Use Copy Message when SMS links are blocked or when you want to paste the message somewhere else.\n\nSteps:\n1. Build the AAC message.\n2. Tap Copy Message.\n3. Paste it into email, chat, notes, or another app.\n\nTip: This is the best fallback on desktop computers."],
   ["#receivedMessage", "Received Message", "Use Received Message when someone replies outside the app and you want the reply spoken aloud.\n\nSteps:\n1. Copy the reply from the other app.\n2. Paste it into this box.\n3. Tap Speak Received.\n\nNote: The reply is not automatically imported from SMS."],
   ["#speakReceivedBtn", "Speak Received", "Use Speak Received to read a pasted reply aloud.\n\nSteps:\n1. Paste a reply into Received Message.\n2. Tap Speak Received.\n3. Adjust voice settings if the reply is too fast or too slow."],
+  ["#startListenBtn", "Start Listening", "Starts listening for nearby speech and writes it as captions.\n\nSteps:\n1. Tap Start Listening.\n2. Allow microphone access if the browser asks.\n3. Let the speaker talk clearly.\n4. Review the written caption.\n5. Tap Find Responses.\n\nTip: If the browser does not support listening, type the heard words in the text box."],
+  ["#stopListenBtn", "Stop Listening", "Stops the current listening session.\n\nSteps:\n1. Tap Stop Listening when the speaker is done.\n2. Review the written caption.\n3. Tap Find Responses or Clear Captions."],
+  ["#clearTranscriptBtn", "Clear Captions", "Clears the Word Finder caption and typed text.\n\nSteps:\n1. Tap Clear Captions.\n2. Start listening again or type a new word or sentence."],
+  ["#finderInput", "Typed or Heard Words", "Shows the transcript from listening mode and also accepts typed words.\n\nSteps:\n1. Type what was heard if speech recognition is unavailable.\n2. Keep the wording short when possible.\n3. Tap Find Responses."],
+  ["#findResponsesBtn", "Find Responses", "Builds response choices from the caption or typed words.\n\nSteps:\n1. Listen or type a sentence.\n2. Tap Find Responses.\n3. Tap a suggested response.\n4. Use Speak when the response is ready."],
+  ["#speakCaptionBtn", "Speak Caption", "Reads the written caption aloud with the selected voice.\n\nSteps:\n1. Review the caption.\n2. Tap Speak Caption.\n3. Adjust speech settings if it is too fast or unclear."],
   ["#chatName", "Participant Name", "Use Participant Name to label who sent a group message.\n\nSteps:\n1. Type a short role or first name.\n2. Avoid full names in public demos.\n3. Send a message to see the name in Room Messages."],
   ["#chatRoom", "Room Code", "Use Room Code to keep one activity's messages separate from another.\n\nSteps:\n1. Type a simple room name, such as therapy-room or monday-group.\n2. Use the same room code in another tab on this device.\n3. Send messages during the activity.\n\nNote: Separate devices need a realtime backend added later."],
   ["#sendChatBtn", "Send AAC Message", "Use Send AAC Message when the message bar has something the user wants to share with the group.\n\nSteps:\n1. Build a message on Communicate.\n2. Open Group Chat.\n3. Confirm participant name and room code.\n4. Tap Send AAC Message.\n5. Watch the message appear in Room Messages."],
@@ -1484,6 +1493,8 @@ let editMode = false;
 let chatChannel = null;
 let tooltipTimer = null;
 let pendingTooltip = null;
+let speechRecognizer = null;
+let listeningActive = false;
 const TOOLTIP_DELAY_MS = 2200;
 
 const el = {
@@ -1503,6 +1514,15 @@ const el = {
   receivedMessage: document.querySelector("#receivedMessage"),
   speakReceivedBtn: document.querySelector("#speakReceivedBtn"),
   smsStatus: document.querySelector("#smsStatus"),
+  startListenBtn: document.querySelector("#startListenBtn"),
+  stopListenBtn: document.querySelector("#stopListenBtn"),
+  clearTranscriptBtn: document.querySelector("#clearTranscriptBtn"),
+  finderCaption: document.querySelector("#finderCaption"),
+  finderInput: document.querySelector("#finderInput"),
+  findResponsesBtn: document.querySelector("#findResponsesBtn"),
+  speakCaptionBtn: document.querySelector("#speakCaptionBtn"),
+  finderStatus: document.querySelector("#finderStatus"),
+  finderSuggestions: document.querySelector("#finderSuggestions"),
   chatName: document.querySelector("#chatName"),
   chatRoom: document.querySelector("#chatRoom"),
   chatTypedMessage: document.querySelector("#chatTypedMessage"),
@@ -1631,11 +1651,17 @@ function loadState() {
 function migrateState(nextState) {
   const corePage = nextState.pages?.find((pageItem) => pageItem.id === "core");
   const oldCoreLabels = ["I", "you", "want", "go", "more", "all done", "help", "stop", "yes", "no", "please", "thank you"];
-  const currentLabels = new Set(corePage?.tiles?.map((item) => item.label) || []);
+  let currentLabels = new Set(corePage?.tiles?.map((item) => item.label) || []);
   const looksLikeOldStarterCore = corePage?.tiles?.length <= 16 && oldCoreLabels.every((label) => currentLabels.has(label));
   if (looksLikeOldStarterCore) {
     corePage.tiles = JSON.parse(JSON.stringify(starterPages[0].tiles));
     nextState.columns = Math.max(Number(nextState.columns) || 6, 6);
+    currentLabels = new Set(corePage.tiles.map((item) => item.label));
+  }
+  if (corePage && !currentLabels.has("to")) {
+    const afterComeIndex = corePage.tiles.findIndex((item) => item.label === "come");
+    const insertIndex = afterComeIndex >= 0 ? afterComeIndex + 1 : Math.min(corePage.tiles.length, 12);
+    corePage.tiles.splice(insertIndex, 0, tile("to", "to", "right", "core"));
   }
   return nextState;
 }
@@ -1987,6 +2013,7 @@ function render() {
   renderProfileOptions();
   renderPictureWordBuilder();
   renderSettings();
+  renderFinderSuggestions();
   renderChat();
 }
 
@@ -2010,6 +2037,161 @@ function speak(text) {
   utterance.rate = Number(state.settings.rate);
   utterance.pitch = Number(state.settings.pitch);
   window.speechSynthesis.speak(utterance);
+}
+
+function recognitionConstructor() {
+  return window.SpeechRecognition || window.webkitSpeechRecognition;
+}
+
+function setFinderStatus(text) {
+  if (el.finderStatus) el.finderStatus.textContent = text;
+}
+
+function updateFinderCaption(text) {
+  const cleanText = text.trim();
+  el.finderInput.value = cleanText;
+  el.finderCaption.textContent = cleanText || "Press Start Listening, or type words below.";
+  renderFinderSuggestions();
+}
+
+function ensureSpeechRecognizer() {
+  const Recognition = recognitionConstructor();
+  if (!Recognition) return null;
+  if (speechRecognizer) return speechRecognizer;
+
+  speechRecognizer = new Recognition();
+  speechRecognizer.continuous = true;
+  speechRecognizer.interimResults = true;
+  speechRecognizer.lang = "en-US";
+
+  speechRecognizer.addEventListener("start", () => {
+    listeningActive = true;
+    setFinderStatus("Listening. Speak clearly near the device.");
+    el.startListenBtn.disabled = true;
+    el.stopListenBtn.disabled = false;
+  });
+
+  speechRecognizer.addEventListener("end", () => {
+    listeningActive = false;
+    el.startListenBtn.disabled = false;
+    el.stopListenBtn.disabled = true;
+    setFinderStatus("Listening stopped. Review the caption or find responses.");
+  });
+
+  speechRecognizer.addEventListener("result", (event) => {
+    let transcript = "";
+    for (let index = 0; index < event.results.length; index += 1) {
+      transcript += `${event.results[index][0].transcript} `;
+    }
+    updateFinderCaption(transcript);
+  });
+
+  speechRecognizer.addEventListener("error", (event) => {
+    listeningActive = false;
+    el.startListenBtn.disabled = false;
+    el.stopListenBtn.disabled = true;
+    setFinderStatus(`Listening is not available right now: ${event.error}. Type the words instead.`);
+  });
+
+  return speechRecognizer;
+}
+
+function startListening() {
+  const recognizer = ensureSpeechRecognizer();
+  if (!recognizer) {
+    setFinderStatus("This browser does not support built-in speech recognition. Type the heard words instead.");
+    return;
+  }
+  try {
+    recognizer.start();
+  } catch {
+    if (!listeningActive) setFinderStatus("Listening could not start. Try again, or type the heard words.");
+  }
+}
+
+function stopListening() {
+  if (speechRecognizer && listeningActive) speechRecognizer.stop();
+}
+
+function clearFinderTranscript() {
+  updateFinderCaption("");
+  setFinderStatus("Captions cleared.");
+}
+
+function baseFinderResponses() {
+  return [
+    wordBankItem("yes", "yes", "social"),
+    wordBankItem("no", "no", "social"),
+    wordBankItem("I don't know", "question", "core"),
+    wordBankItem("I don't understand", "question", "core"),
+    wordBankItem("please say that again", "please", "social"),
+    wordBankItem("show me", "look", "verb"),
+    wordBankItem("I need help", "help", "core"),
+    wordBankItem("wait", "time", "verb"),
+    wordBankItem("stop", "stop", "core"),
+    wordBankItem("tell me more", "more", "core"),
+  ];
+}
+
+function keywordFinderResponses(text) {
+  const responses = [];
+  const includesAny = (words) => words.some((word) => text.includes(word));
+  if (includesAny(["want", "like", "choose", "pick"])) responses.push(wordBankItem("I want that", "want", "core"));
+  if (includesAny(["go", "come", "leave", "outside"])) responses.push(wordBankItem("I want to go", "go", "core"));
+  if (includesAny(["eat", "food", "hungry", "snack"])) responses.push(wordBankItem("I want food", "food", "core"));
+  if (includesAny(["drink", "water", "thirsty"])) responses.push(wordBankItem("I want drink", "drink", "core"));
+  if (includesAny(["hurt", "pain", "sick", "doctor"])) responses.push(wordBankItem("my body hurts", "pain", "core"), wordBankItem("I need a doctor", "doctor", "core"));
+  if (includesAny(["break", "tired", "quiet", "loud"])) responses.push(wordBankItem("I need a break", "break", "core"), wordBankItem("I need quiet", "quiet", "core"));
+  if (includesAny(["what", "where", "when", "why", "how", "?"])) responses.push(wordBankItem("I need more time", "time", "core"), wordBankItem("can you show me?", "look", "social"));
+  return responses;
+}
+
+function finderResponseCandidates() {
+  const text = el.finderInput.value.trim().toLowerCase();
+  const textWords = text.split(/[^a-z0-9']+/).filter((word) => word.length > 2);
+  const matchingVocabulary = allWordBankItems()
+    .filter((item) => {
+      const haystack = `${item.label} ${item.spoken} ${item.categoryName}`.toLowerCase();
+      return textWords.some((word) => haystack.includes(word));
+    })
+    .slice(0, 8);
+  const candidates = [...keywordFinderResponses(text), ...matchingVocabulary, ...baseFinderResponses()];
+  const seen = new Set();
+  return candidates.filter((item) => {
+    const key = item.label.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, 14);
+}
+
+function renderFinderSuggestions() {
+  if (!el.finderSuggestions) return;
+  const candidates = finderResponseCandidates();
+  el.finderSuggestions.innerHTML = "";
+  candidates.forEach((item) => {
+    const button = document.createElement("button");
+    button.className = `finder-suggestion ${item.kind || "noun"}`;
+    button.type = "button";
+    button.setAttribute("aria-label", `Use response ${item.label}`);
+
+    const icon = document.createElement("span");
+    icon.className = "tile-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.innerHTML = iconMap[item.icon] || normalizeIcon(item.icon || item.label, item.label);
+
+    const label = document.createElement("span");
+    label.className = "tile-label";
+    label.textContent = item.label;
+
+    button.append(icon, label);
+    button.addEventListener("click", () => {
+      message = (item.spoken || item.label).split(" ");
+      renderSentence();
+      setFinderStatus(`Placed "${item.label}" in the message bar. Tap Speak when ready.`);
+    });
+    el.finderSuggestions.append(button);
+  });
 }
 
 function loadVoices() {
@@ -2602,6 +2784,22 @@ el.speakReceivedBtn.addEventListener("click", () => {
   if (received) speak(received);
 });
 
+el.startListenBtn.addEventListener("click", startListening);
+el.stopListenBtn.addEventListener("click", stopListening);
+el.clearTranscriptBtn.addEventListener("click", clearFinderTranscript);
+el.findResponsesBtn.addEventListener("click", () => {
+  renderFinderSuggestions();
+  setFinderStatus("Response suggestions updated.");
+});
+el.speakCaptionBtn.addEventListener("click", () => {
+  const caption = el.finderInput.value.trim();
+  if (caption) speak(caption);
+});
+el.finderInput.addEventListener("input", () => {
+  el.finderCaption.textContent = el.finderInput.value.trim() || "Press Start Listening, or type words below.";
+  renderFinderSuggestions();
+});
+
 el.chatName.addEventListener("change", () => {
   state.chatName = el.chatName.value.trim() || "AAC User";
   saveState();
@@ -2783,6 +2981,7 @@ el.resetBtn.addEventListener("click", () => {
 });
 
 window.speechSynthesis?.addEventListener("voiceschanged", loadVoices);
+el.stopListenBtn.disabled = true;
 setupContextHelp();
 connectChatChannel();
 loadVoices();

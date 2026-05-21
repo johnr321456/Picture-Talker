@@ -30,8 +30,9 @@ https://yourusername.github.io/picture-aac-talker/
 ## Included
 
 - Communication board with picture tiles and text-to-speech
-- 6 x 6 default Core board with people, actions, things, feelings, and places pages
+- 6 x 6 default Core board with high-priority words including `to`, plus people, actions, things, feelings, and places pages
 - Optional 9 x 9 Expanded Core starter board for denser primary vocabulary
+- Word Finder listening mode with large written captions and suggested AAC responses when browser speech recognition is available
 - Local board generator from a caregiver description
 - Picture Word Builder with 650+ categorized vocabulary items, search, tap-to-add, and drag-and-drop board building
 - Local profiles for saving and loading customized boards on the same device
@@ -53,6 +54,7 @@ https://yourusername.github.io/picture-aac-talker/
 - Help tab with animated click-path GIF walkthroughs, concise tool reference, and large preview frames
 - Context F1 help and hover tooltips for the main commands and controls
 - Full command reference for Communicate, Group Chat, Builder, Settings, SMS, backups, and privacy limits
+- Word Finder help for captions, typed fallback, and response suggestions
 - Clickable Help previews that open in a large frame with a full-screen option
 - Standalone walkthrough help page at `docs/help.html` with Step 1/Step 2/Step 3 lists, spoken narration, and searchable command help
 
