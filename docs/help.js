@@ -17,6 +17,17 @@ const lessons = {
       { title: "Use the new board", detail: "After loading, go to Communicate and test a few real messages. Add missing words later with Add Picture Tile.", narration: "Step 3. The app returns to Communicate with the new board ready to use." },
     ],
   },
+  group: {
+    prefix: "07-group-chat",
+    title: "Group Chat",
+    steps: [
+      { title: "Enter name and room", detail: "Type a short participant name and a room code for the activity. Use the same room code in another tab on the same device to practice turn-taking.", narration: "Step 1. Enter a participant name and room code for this practice activity." },
+      { title: "Build a message", detail: "Open Communicate and build the message with picture tiles. The Group Chat sends whatever is in the message bar.", narration: "Step 2. Build the message on the Communicate board." },
+      { title: "Send AAC Message", detail: "Return to Group Chat and tap Send AAC Message. The message appears in Room Messages with the participant name and time.", narration: "Step 3. Return to Group Chat and tap Send AAC Message." },
+      { title: "Read replies", detail: "Use Speak Last to read the newest room message, or Speak Chat to read the full room transcript aloud.", narration: "Step 4. Use Speak Last for the newest reply, or Speak Chat for the full transcript." },
+      { title: "Save or clear", detail: "Use Save Chat to download a private transcript. Use Clear Local Chat before a new activity if the old room messages are no longer needed.", narration: "Step 5. Save the chat transcript if needed, or clear the local chat before a new activity." },
+    ],
+  },
   pictureBuilder: {
     prefix: "02-starter-boards",
     title: "Picture Word Builder",

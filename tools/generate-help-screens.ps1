@@ -143,6 +143,49 @@ function Base-BuilderStarter($g) {
   Draw-Board $g 720 250 3 @("First Words", "Mealtime", "Play", "School", "Feelings", "Sick or Pain", "Bathroom", "Devices", "Full Core")
 }
 
+function Base-GroupChat($g) {
+  Fill-Round $g 40 30 1320 95 8 (Brush 255 255 255)
+  Stroke-Round $g 40 30 1320 95 8 (Pen 203 216 210 2)
+  Draw-Text $g "I want to play" 65 50 745 55 30 ([System.Drawing.FontStyle]::Regular) ([System.Drawing.Color]::FromArgb(23, 33, 31))
+  Draw-Button $g "Speak" 910 50 125 55 $true
+  Draw-Button $g "Backspace" 1050 50 170 55 $false
+  Draw-Button $g "Clear" 1235 50 95 55 $false
+
+  $tabs = @("Communicate", "Word Finder", "Group Chat", "Builder", "Settings", "Help")
+  for ($i = 0; $i -lt $tabs.Count; $i++) {
+    Draw-Button $g $tabs[$i] (40 + ($i * 215)) 145 198 58 ($tabs[$i] -eq "Group Chat")
+  }
+
+  Fill-Round $g 40 235 600 540 8 (Brush 255 255 255)
+  Stroke-Round $g 40 235 600 540 8 (Pen 203 216 210 2)
+  Draw-Text $g "Group Chat" 65 255 520 40 30 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(23, 33, 31))
+  Draw-Text $g "Participant name" 65 325 230 30 21 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(88, 103, 98))
+  Draw-Button $g "AAC User" 65 360 250 55 $false
+  Draw-Text $g "Room code" 340 325 230 30 21 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(88, 103, 98))
+  Draw-Button $g "therapy-room" 340 360 250 55 $false
+  Draw-Button $g "Send AAC Message" 65 445 245 55 $true
+  Draw-Button $g "Send Typed Reply" 340 445 245 55 $false
+  Draw-Button $g "Speak Chat" 65 515 245 55 $false
+  Draw-Button $g "Save Chat" 340 515 245 55 $false
+  Draw-Button $g "Clear Local Chat" 65 585 520 55 $false
+  Draw-Text $g "Typed reply" 65 655 520 28 21 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(88, 103, 98))
+  Fill-Round $g 65 690 520 55 8 (Brush 255 255 255)
+  Stroke-Round $g 65 690 520 55 8 (Pen 203 216 210 2)
+
+  Fill-Round $g 700 235 620 540 8 (Brush 255 255 255)
+  Stroke-Round $g 700 235 620 540 8 (Pen 203 216 210 2)
+  Draw-Text $g "Room Messages" 725 255 360 40 30 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(23, 33, 31))
+  Draw-Button $g "Speak Last" 1100 255 170 55 $false
+  Fill-Round $g 730 340 535 82 8 (Brush 231 242 238)
+  Stroke-Round $g 730 340 535 82 8 (Pen 36 124 99 2)
+  Draw-Text $g "AAC User  10:15 AM" 750 348 480 24 18 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(88, 103, 98))
+  Draw-Text $g "I want to play" 750 378 480 30 24 ([System.Drawing.FontStyle]::Regular) ([System.Drawing.Color]::FromArgb(23, 33, 31))
+  Fill-Round $g 730 445 535 82 8 (Brush 248 251 250)
+  Stroke-Round $g 730 445 535 82 8 (Pen 203 216 210 2)
+  Draw-Text $g "SLP  10:16 AM" 750 453 480 24 18 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(88, 103, 98))
+  Draw-Text $g "Great choice. Your turn." 750 483 480 30 24 ([System.Drawing.FontStyle]::Regular) ([System.Drawing.Color]::FromArgb(23, 33, 31))
+}
+
 function Base-Vocab($g) {
   Draw-AppShell $g "Builder"
   Fill-Round $g 45 235 620 330 8 (Brush 255 255 255)
@@ -215,6 +258,12 @@ Make-Step "01-communicate-step-3.png" ${function:Base-Communicate} "Step 3: Spea
 Make-Step "02-starter-boards-step-1.png" ${function:Base-BuilderStarter} "Step 1: Choose a starter" "Pick a routine such as Mealtime, School, or First Words." @(65,350,540,55) @(740,535,520,115) @(335,378)
 Make-Step "02-starter-boards-step-2.png" ${function:Base-BuilderStarter} "Step 2: Load it" "Tap Load Starter. It replaces the current board with the starter you chose." @(65,420,200,55) @(95,610,520,115) @(165,448)
 Make-Step "02-starter-boards-step-3.png" ${function:Base-BuilderStarter} "Step 3: Communicate" "The app returns to Communicate with the new board ready to use." @(40,145,310,58) @(760,620,500,115) @(190,174)
+
+Make-Step "07-group-chat-step-1.png" ${function:Base-GroupChat} "Step 1: Name and room" "Enter a short participant name and a room code for this activity." @(65,325,525,90) @(720,590,520,125) @(325,388)
+Make-Step "07-group-chat-step-2.png" ${function:Base-GroupChat} "Step 2: Build message" "Open Communicate and build the message that should be sent to the group." @(40,145,198,58) @(740,600,520,125) @(139,174)
+Make-Step "07-group-chat-step-3.png" ${function:Base-GroupChat} "Step 3: Send message" "Return to Group Chat and tap Send AAC Message. The message appears in Room Messages." @(65,445,245,55) @(750,615,520,125) @(188,472)
+Make-Step "07-group-chat-step-4.png" ${function:Base-GroupChat} "Step 4: Read replies" "Use Speak Last for the newest reply, or Speak Chat to read the full transcript." @(65,515,245,55) @(740,610,540,125) @(188,542)
+Make-Step "07-group-chat-step-5.png" ${function:Base-GroupChat} "Step 5: Save or clear" "Save a private transcript if needed, then clear the local chat before a new activity." @(340,515,245,125) @(705,610,570,125) @(462,542)
 
 Make-Step "03-vocabulary-builder-step-1.png" ${function:Base-Vocab} "Step 1: Enter target words" "Type the small set of words you want to practice today." @(70,350,540,95) @(740,600,520,115) @(340,395)
 Make-Step "03-vocabulary-builder-step-2.png" ${function:Base-Vocab} "Step 2: Show only targets" "Turn on the checkbox to reduce distraction while keeping word positions stable." @(70,455,420,45) @(730,90,540,125) @(260,478)

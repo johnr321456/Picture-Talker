@@ -234,6 +234,44 @@ $drawStarter = {
   Draw-Tiles $g 410 145 3 @("First Words", "Mealtime", "Play", "School", "Feelings", "Sick")
 }
 
+$drawGroup = {
+  param($g)
+  Fill-Round $g 8 8 704 444 4 (Brush 255 255 255)
+  Stroke-Round $g 8 8 704 444 4 (Pen 174 187 182 2)
+  Fill-Round $g 22 22 450 42 5 (Brush 255 255 255)
+  Stroke-Round $g 22 22 450 42 5 (Pen 203 216 210 1.5)
+  Draw-Text $g "I want to play" 34 24 425 38 17 ([System.Drawing.FontStyle]::Regular) ([System.Drawing.Color]::FromArgb(23, 33, 31))
+  Draw-Button $g "Speak" 488 22 70 42 $true
+  Draw-Button $g "Backspace" 568 22 84 42 $false
+  Draw-Button $g "Clear" 660 22 42 42 $false
+  Draw-Button $g "Communicate" 22 78 105 38 $false
+  Draw-Button $g "Word Finder" 133 78 105 38 $false
+  Draw-Button $g "Group Chat" 244 78 105 38 $true
+  Draw-Button $g "Builder" 355 78 105 38 $false
+  Draw-Button $g "Settings" 466 78 105 38 $false
+  Draw-Button $g "Help" 577 78 105 38 $false
+
+  Draw-Panel $g "Group Chat" 22 136 320 272
+  Draw-Text $g "Participant name" 40 185 130 24 13 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(88,103,98))
+  Draw-Button $g "AAC User" 40 212 130 32 $false
+  Draw-Text $g "Room code" 190 185 130 24 13 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(88,103,98))
+  Draw-Button $g "therapy-room" 190 212 130 32 $false
+  Draw-Button $g "Send AAC Message" 40 260 132 34 $true
+  Draw-Button $g "Typed Reply" 188 260 132 34 $false
+  Draw-Button $g "Speak Chat" 40 306 132 34 $false
+  Draw-Button $g "Save Chat" 188 306 132 34 $false
+  Draw-Button $g "Clear Local Chat" 40 352 280 34 $false
+
+  Draw-Panel $g "Room Messages" 380 136 305 272
+  Draw-Button $g "Speak Last" 560 158 100 34 $false
+  Fill-Round $g 402 210 245 54 5 (Brush 231 242 238)
+  Stroke-Round $g 402 210 245 54 5 (Pen 36 124 99 1.5)
+  Draw-Text $g "AAC User   I want to play" 416 215 220 44 14 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(23,33,31))
+  Fill-Round $g 402 282 245 54 5 (Brush 248 251 250)
+  Stroke-Round $g 402 282 245 54 5 (Pen 203 216 210 1.5)
+  Draw-Text $g "SLP   Great choice." 416 287 220 44 14 ([System.Drawing.FontStyle]::Bold) ([System.Drawing.Color]::FromArgb(23,33,31))
+}
+
 $drawVocab = {
   param($g)
   Draw-App $g "builder"
@@ -283,6 +321,14 @@ Make-Animation "starter-board-workflow.gif" @(
   @{ Draw=$drawStarter; Text="Step 1: Open Builder."; Path=@(@(90,392),@(220,106)); Target=@(220,106) },
   @{ Draw=$drawStarter; Text="Step 2: Choose a starter."; Path=@(@(220,106),@(200,235)); Target=@(200,235) },
   @{ Draw=$drawStarter; Text="Step 3: Load Starter."; Path=@(@(200,235),@(95,281)); Target=@(95,281) }
+)
+
+Make-Animation "group-chat-workflow.gif" @(
+  @{ Draw=$drawGroup; Text="Step 1: Enter name and room."; Path=@(@(80,392),@(105,228)); Target=@(105,228) },
+  @{ Draw=$drawGroup; Text="Step 2: Build the AAC message."; Path=@(@(105,228),@(78,98)); Target=@(78,98) },
+  @{ Draw=$drawGroup; Text="Step 3: Send AAC Message."; Path=@(@(78,98),@(106,278)); Target=@(106,278) },
+  @{ Draw=$drawGroup; Text="Step 4: Speak the newest reply."; Path=@(@(106,278),@(610,176)); Target=@(610,176) },
+  @{ Draw=$drawGroup; Text="Step 5: Save or clear the chat."; Path=@(@(610,176),@(235,323)); Target=@(235,323) }
 )
 
 Make-Animation "vocabulary-builder-workflow.gif" @(
