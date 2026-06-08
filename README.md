@@ -14,17 +14,17 @@ The app uses the browser's built-in Web Speech API for text-to-speech, so availa
 
 This app is plain HTML, CSS, and JavaScript, so it can be hosted for free with GitHub Pages.
 
-1. Create a GitHub repository named `picture-aac-talker`.
-2. Upload the files from this project folder.
+1. Use the GitHub repository `johnr321456/Picture-Talker`.
+2. Upload or push the files from this project folder.
 3. In GitHub, open `Settings -> Pages`.
 4. Set source to `Deploy from a branch`.
 5. Choose branch `main` and folder `/root`.
 6. Save.
 
-GitHub will provide a URL similar to:
+The current published demo URL is:
 
 ```text
-https://yourusername.github.io/picture-aac-talker/
+https://johnr321456.github.io/Picture-Talker/
 ```
 
 ## Included
